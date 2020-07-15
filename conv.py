@@ -60,7 +60,7 @@ class Net(nn.Module):
         activated_x = F.relu(conv_x)
         
         # returns both layers
-        return conv_x
+        return conv_x, activated_x
     
 # instantiate the model and set the weights
 weight = torch.from_numpy(filters).unsqueeze(1).type(torch.FloatTensor)
@@ -99,8 +99,11 @@ for i in range(4):
 gray_img_tensor = torch.from_numpy(gray_img).unsqueeze(0).unsqueeze(1)
 
 # get the convolutional layer (pre and post activation)
-conv_layer = model(gray_img_tensor)
+conv_layer, activated_layer = model(gray_img_tensor)
 
 # visualize the output of a conv layer
 viz_layer(conv_layer)
 
+# after a ReLu is applied
+# visualize the output of an activated conv layer
+viz_layer(activated_layer)
